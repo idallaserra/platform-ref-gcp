@@ -9,7 +9,7 @@ spec:
   id: platform-ref-gcp-cluster
   parameters:
     nodes:
-      count: 3
+      count: 1
       size: small
     services:
       operators:

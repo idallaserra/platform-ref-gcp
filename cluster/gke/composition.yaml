@@ -16,7 +16,7 @@ spec:
         spec:
           forProvider:
             initialClusterVersion: "1.16"
-            location: us-west2
+            location: europe-west3
             masterAuth:
               # setting this master auth user name enables basic auth so that a client (e.g.,
               # provider-helm), can connect with the generated kubeconfig from the connection secret
@@ -28,8 +28,7 @@ spec:
               clusterSecondaryRangeName: pods
               servicesSecondaryRangeName: services
             privateClusterConfig:
-              enablePrivateNodes: true
-              masterIpv4CidrBlock: 10.205.0.0/28
+              enablePrivateNodes: false
             networkConfig:
               enableIntraNodeVisibility: true
             loggingService: logging.googleapis.com/kubernetes
@@ -62,7 +61,7 @@ spec:
         kind: NodePool
         spec:
           forProvider:
-            location: us-west2
+            location: europe-west3
             initialNodeCount: 1
             clusterSelector:
               # Attach this node pool to the GKECluster created above.

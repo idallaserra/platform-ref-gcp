@@ -27,7 +27,7 @@ spec:
         kind: Subnetwork
         spec:
           forProvider:
-            region: us-west2
+            region: europe-west3
             networkSelector:
               # This selector ensures this Subnetwork will select and use the
               # above Network. They will both be part of the XR, and thus their
