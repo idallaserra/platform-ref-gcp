@@ -100,20 +100,7 @@ kubectl delete providers.pkg.crossplane.io provider-helm
     * `Network`
     * `Subnetwork`
 
-## Customize for your Organization
-
-Create a `Repository` called `platform-ref-gcp` in your Upbound Cloud `Organization`.
-
-Set these to match your settings:
-
-```console
-UPBOUND_ORG=acme
-UPBOUND_ACCOUNT_EMAIL=me@acme.io
-REPO=platform-ref-gcp
-VERSION_TAG=v0.0.1
-REGISTRY=registry.upbound.io
-PLATFORM_CONFIG=${REGISTRY:+$REGISTRY/}${UPBOUND_ORG}/${REPO}:${VERSION_TAG}
-```
+## Customize 
 
 Clone the GitHub repo.
 
@@ -125,13 +112,13 @@ cd platform-ref-gcp
 Login to your container registry.
 
 ```console
-docker login ${REGISTRY} -u ${UPBOUND_ACCOUNT_EMAIL}
+docker login ${REGISTRY} -u ${USER_LOGIN}
 ```
 
 Build package.
 
 ```console
-kubectl crossplane build configuration --name package.xpkg --ignore "examples/*,hack/*"
+kubectl crossplane build configuration --name package.xpkg --ignore "examples/*"
 ```
 
 Push package to registry.
