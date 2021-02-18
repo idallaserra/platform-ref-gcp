@@ -10,19 +10,13 @@ all composed using cloud service primitives from the [Crossplane GCP
 Provider](https://doc.crds.dev/github.com/crossplane/provider-gcp). App deployments can securely
 connect to the infrastructure they need using secrets distributed directly to the app namespace.
 
-## Quick Start
+## Requirements
 
-### Platform Ops/SRE: Run your own internal cloud platform
+A fully working Kubernetes cluster with `kubectl` configured for accessing to it.
 
-#### Create a free account in Upbound Cloud
+Crossplane fully installed on it, you can refer to the [official documentation](https://crossplane.io/docs/v1.0/getting-started/install-configure.html) for installing method.
 
-1. Sign up for [Upbound Cloud](https://cloud.upbound.io/register).
-1. Create an `Organization` for your teams.
-
-#### Create a Platform instance in Upbound Cloud
-
-1. Create a `Platform` in Upbound Cloud (e.g. dev, staging, or prod).
-1. Connect `kubectl` to your `Platform` instance.
+In addition to Crossplane the GCP and Helm provider must be installed, follow the [official guide](https://crossplane.io/docs/v1.0/introduction/providers.html).
 
 #### Install the Crossplane kubectl extension (for convenience)
 
@@ -34,12 +28,11 @@ cp kubectl-crossplane /usr/local/bin
 #### Install the Platform Configuration
 
 ```console
-PLATFORM_CONFIG=registry.upbound.io/upbound/platform-ref-gcp:v0.0.1
+PLATFORM_CONFIG=regitry.io/platform-ref-gcp:latest
 
 kubectl crossplane install configuration ${PLATFORM_CONFIG}
 kubectl get pkg
 ```
-
 #### GCP Provider Setup
 
 Set up your GCP account keyfile by following the instructions on:
@@ -62,44 +55,22 @@ Create the `ProviderConfig`, ensuring to set the `projectID` to your specific GC
 ```console
 kubectl apply -f examples/provider-default-gcp.yaml
 ```
+#### App Dev/Ops: Consume the infrastructure you need using kubectl
 
-#### Invite App Teams to you Organization in Upbound Cloud
+Now you can provide with kubectl the infrastructure in the examples folder:
 
-1. Create a team `Workspace` in Upbound Cloud, named `team1`.
-1. Enable self-service APIs in each `Workspace`.
-1. Invite app team members and grant access to `Workspaces` in one or more
-     `Platforms`.
+```console
+kubectl apply -f examples/<file-name.yaml>
+```
 
-### App Dev/Ops: Consume the infrastructure you need using kubectl
-
-#### Join your Organization in Upbound Cloud
-
-1. **Join** your [Upbound Cloud](https://cloud.upbound.io/register)
-   `Organization`
-1. Verify access to your team `Workspaces`
-
-#### Provision a Network fabric in your team Workspace GUI console
-
-1. Browse the available self-service APIs (XRDs) in your team `Workspace`
-1. Provision a `Network` using the custom generated GUI for your
-Platform `Configuration`
-1. View status / details in your `Workspace` GUI console
-
-#### Provision a Kubernetes cluster in your team Workspace GUI console
-
-1. Browse the available self-service APIs (XRDs) in your team `Workspace`
-1. Provision a `Cluster` using the custom generated GUI for your
-Platform `Configuration`
-1. View status / details in your `Workspace` GUI console
+1. network: 
+2. cluster:
+3. sql:
 
 ### Cleanup & Uninstall
-
 #### Cleanup Resources
 
-There are 2 options to delete resources created through the `Workspace` GUI:
-
-* From the `Workspace` GUI using the ellipsis menu in the resource view.
-* Using `kubectl delete -n team1 <claim-name>`.
+* Using `kubectl delete -f examples/<file-name.yaml>`.
 
 Verify all underlying resources have been cleanly deleted:
 
