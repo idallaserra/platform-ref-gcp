@@ -148,3 +148,4 @@ we'd love to hear from you and chat. You can setup some time with us at
 info@upbound.io.
 
 For Crossplane questions, drop by [slack.crossplane.io](https://slack.crossplane.io), and say hi!
+
